@@ -12,12 +12,14 @@ Vercel **không** chạy server Node + Socket.io lâu dài, nên backend phải 
 
 1. Vào [railway.app](https://railway.app), đăng nhập bằng GitHub.
 2. **New Project** → **Deploy from GitHub repo** → chọn repo `game-scoring`.
-3. Chọn **Root Directory**: `backend`.
+3. **Quan trọng:** Trong cài đặt service, đặt **Root Directory** = `backend` (nếu không sẽ lỗi *"Error creating build plan with Railpack"* vì repo có cả frontend + backend).
 4. **Variables** (giống `.env`):
    - `PORT` = `3001` (Railway tự gán port qua `process.env.PORT`)
    - `MONGODB_URI` = connection string MongoDB Atlas của bạn
    - `JWT_SECRET` = chuỗi bí mật bất kỳ (dài, random)
 5. **Settings** → **Networking** → **Generate Domain** → copy URL (vd: `https://game-scoring-production-xxxx.up.railway.app`).
+
+**Nếu build bị lỗi "Error creating build plan with Railpack":** Vào **Service** → **Settings** → **Root Directory** → nhập `backend` → **Redeploy**.
 
 ### CORS backend
 
