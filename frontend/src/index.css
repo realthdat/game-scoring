@@ -1,0 +1,638 @@
+:root {
+  --bg: #0f0f14;
+  --surface: #1a1a24;
+  --border: #2d2d3a;
+  --text: #e8e6e3;
+  --text-muted: #8b8b9e;
+  --accent: #c9a227;
+  --accent-hover: #e0b82e;
+  --danger: #c94a4a;
+  --success: #4a9c6d;
+  --radius: 10px;
+  --font: 'Be Vietnam Pro', system-ui, sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.5;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: var(--safe-bottom);
+}
+
+.app-root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer {
+  margin-top: auto;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* Touch-friendly inputs & buttons */
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: 16px; /* iOS tránh zoom khi focus */
+}
+
+input, select, textarea {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  min-height: 44px; /* iOS touch target chuẩn */
+  transition: background 0.2s, transform 0.1s;
+}
+button:active { transform: scale(0.97); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ========================
+   Page wrapper
+   ======================== */
+.page-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+@media (min-width: 640px) {
+  .page-wrapper { padding: 24px; }
+}
+
+/* ========================
+   Section card
+   ======================== */
+.section-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .section-card { padding: 20px; margin-bottom: 20px; }
+}
+
+.section-title {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ========================
+   Score table (mobile scroll)
+   ======================== */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .table-wrap { margin: 0; padding: 0; }
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.score-table th {
+  text-align: center;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+
+.score-table td {
+  text-align: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.score-table .cumulative-row {
+  font-weight: 700;
+  background: rgba(201, 162, 39, 0.08);
+}
+
+.score-table .cumulative-row td {
+  border-bottom: none;
+}
+
+/* Cột Host — tên và số điểm màu vàng, không tô nền */
+.score-table th.host-column,
+.score-table td.host-column {
+  color: var(--accent);
+}
+.score-table th.host-column {
+  font-weight: 700;
+}
+
+/* Tích lũy: > 0 xanh dạ quang, <= 0 trắng */
+.score-table .cumulative-row td {
+  color: #fff;
+}
+.score-table .cumulative-row td.cumulative-positive {
+  color: #39ff14;
+}
+.score-table .cumulative-row td.host-column {
+  color: var(--accent);
+}
+.score-table .cumulative-row td.host-column.cumulative-positive {
+  color: #39ff14;
+}
+
+@media (min-width: 640px) {
+  .score-table { font-size: 1rem; }
+  .score-table th,
+  .score-table td { padding: 10px 12px; }
+}
+
+/* ========================
+   Forms
+   ======================== */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 44px;
+}
+
+.form-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  width: 100%;
+}
+
+.btn-secondary {
+  background: var(--border);
+  color: var(--text);
+  width: 100%;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger { width: auto; }
+}
+
+/* ========================
+   Score input grid (mobile=dọc, desktop=ngang)
+   ======================== */
+.score-input-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.score-input-grid .score-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.score-input-grid .score-field label {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.score-input-grid .score-field input {
+  width: 100px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 44px;
+}
+
+.score-input-grid .score-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+@media (min-width: 640px) {
+  .score-input-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .score-input-grid .score-field {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* ========================
+   Room list
+   ======================== */
+.room-list {
+  list-style: none;
+}
+
+.room-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.room-item .room-info {
+  line-height: 1.4;
+}
+
+.room-item .room-info strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.room-item .room-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .room-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .room-item .room-info strong { display: inline; }
+}
+
+/* ========================
+   Header
+   ======================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.page-header .page-title {
+  font-size: 1.2rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .page-header { gap: 12px; margin-bottom: 24px; }
+  .page-header .page-title { font-size: 1.3rem; }
+}
+
+/* ========================
+   Host notice
+   ======================== */
+.host-notice {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+/* ========================
+   Host actions
+   ======================== */
+.host-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.swap-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.swap-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 44px;
+}
+
+@media (min-width: 640px) {
+  .swap-form {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .swap-form select { width: auto; min-width: 220px; }
+}
+
+/* ========================
+   Login card
+   ======================== */
+.login-wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: radial-gradient(ellipse at 50% 0%, #1e1e2a 0%, var(--bg) 60%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .login-card { padding: 32px; }
+}
+
+.login-card h1 {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.login-card .subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.login-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.login-tabs button {
+  flex: 1;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.login-tabs button.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-form .error-text {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+/* ========================
+   Badge / status
+   ======================== */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge.active {
+  background: rgba(74, 156, 109, 0.15);
+  color: var(--success);
+}
+
+.status-badge.ended {
+  background: rgba(201, 74, 74, 0.15);
+  color: var(--danger);
+}
+
+/* ========================
+   Confirm modal
+   ======================== */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.confirm-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.confirm-message {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.confirm-actions .btn-secondary,
+.confirm-actions .btn-danger {
+  min-height: 40px;
+  padding: 8px 18px;
+}
+
+/* QR icon button (header) */
+.btn-icon-qr {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon-qr svg {
+  display: block;
+}
+
+/* Share room modal (QR + link) */
+.share-modal-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.share-qr-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 12px;
+  background: #fff;
+  border-radius: var(--radius);
+}
+
+.share-qr-wrap img {
+  display: block;
+}
+
+.share-url-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Toast thông báo (sao chép thành công / lỗi) */
+.toast {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: toast-in 0.2s ease-out;
+}
+
+.toast-success {
+  background: rgba(74, 156, 109, 0.2);
+  color: var(--success);
+  border: 1px solid rgba(74, 156, 109, 0.4);
+}
+
+.toast-error {
+  background: rgba(201, 74, 74, 0.15);
+  color: var(--danger);
+  border: 1px solid rgba(201, 74, 74, 0.35);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Toast toàn trang (lỗi từ Room: xóa guest, chuyển Cái, kết thúc game) */
+.toast-global {
+  position: fixed;
+  top: 24px;
+  left: 16px;
+  right: 16px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================
+   Utility
+   ======================== */
+.text-muted { color: var(--text-muted); font-size: 0.9rem; }
+.text-success { color: var(--success); font-size: 0.9rem; }
+.text-danger { color: var(--danger); font-size: 0.9rem; }

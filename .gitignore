@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment (giữ bí mật)
+.env
+*.env.local
+!.env.example
+
+# Build / cache
+frontend/dist/
+backend/dist/
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Vite
+frontend/node_modules/.vite/
