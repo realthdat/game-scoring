@@ -1,4 +1,6 @@
-const API = '/api';
+// Same origin in dev (Vite proxy); set VITE_API_BASE in production (e.g. https://your-backend.railway.app)
+const API_BASE = import.meta.env.VITE_API_BASE || '';
+const API = API_BASE ? `${API_BASE.replace(/\/$/, '')}/api` : '/api';
 
 export async function apiFetch(path, options = {}, token) {
   const headers = {

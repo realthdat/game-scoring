@@ -134,7 +134,8 @@ export default function Room() {
 
   useEffect(() => {
     if (!token || !room) return;
-    const socket = io(window.location.origin, { path: '/socket.io', auth: { token } });
+    const socketUrl = import.meta.env.VITE_API_BASE || window.location.origin;
+    const socket = io(socketUrl, { path: '/socket.io', auth: { token } });
     socketRef.current = socket;
     socket.emit('join_room', roomId);
     if (isOwner) setHostClaimed(true);
